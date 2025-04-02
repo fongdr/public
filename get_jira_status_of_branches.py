@@ -68,7 +68,7 @@ def get_git_branches():
 def get_jira_issue_status(ticket_id):
     url = JIRA_URL + JIRA_API_ENDPOINT.format(ticket_id)
     try:
-        response = requests.get(url, auth=HTTPBasicAuth(JIRA_USER, JIRA_API_TOKEN), verify=False)
+        response = requests.get(url, auth=HTTPBasicAuth(JIRA_USER, JIRA_API_TOKEN), verify=not get_around_IT)
         if response.status_code == 200:
             issue_data = response.json()
             return issue_data['fields']['status']['name'], issue_data['fields']["summary"]
